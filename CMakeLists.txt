@@ -20,6 +20,9 @@ endif()
 # Source files (updated for new structure)
 set(SOURCES
     src/main.c
+    src/commands/init.c
+    src/core/templates.c
+    src/commands/stubs.c
     # Add more .c files here as needed
     # Future: src/commands/init.c
     # Future: src/commands/add.c
