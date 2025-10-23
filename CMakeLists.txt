@@ -17,14 +17,23 @@ if(NOT CMAKE_BUILD_TYPE)
     set(CMAKE_BUILD_TYPE Release)
 endif()
 
-# Source files
+# Source files (updated for new structure)
 set(SOURCES
-    main.c
+    src/main.c
     # Add more .c files here as needed
+    # Future: src/commands/init.c
+    # Future: src/commands/add.c
+    # Future: src/core/utils.c
 )
 
 # Create executable
 add_executable(${PROJECT_NAME} ${SOURCES})
+
+# Include directories (added for new structure)
+target_include_directories(${PROJECT_NAME} PRIVATE
+    src
+    src/include  # For future header files
+)
 
 # Compiler flags
 target_compile_options(${PROJECT_NAME} PRIVATE
@@ -108,5 +117,8 @@ endif()
 
 # Print build information
 message(STATUS "Build type: ${CMAKE_BUILD_TYPE}")
+message(STATUS "C compiler: ${CMAKE_C_COMPILER}")
+message(STATUS "C standard: ${CMAKE_C_STANDARD}")
 message(STATUS "Executable will be: ${EXECUTABLE_NAME}")
+message(STATUS "Source directory: src/")
 message(STATUS "Auto-cleanup enabled: Build artifacts will be removed after successful build")
