@@ -15,6 +15,11 @@ The dependencies are listed a configuration file (`sbor.conf`) which also contai
 
 Since the dependencies have to be imported , they are also included in a separate `include.h` file which is included into the `main.c` file.
 
+## Commands List
+
+![help](./assets/images/help.png)
+
+
 ## Installation and Running
 
 ### From Source
@@ -42,7 +47,7 @@ sbor version
 
 ## Goals
 
-### Project Manager (To be created first)
+### Project Manager
 
 - [x] Initialize a project using `sbor init`
 - [ ] Add dependencies using `sbor add`
