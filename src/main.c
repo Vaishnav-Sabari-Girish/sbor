@@ -2,7 +2,7 @@
 #include <string.h>
 #include "include/commands.h"
 
-#define VERSION "V0.1.1"
+#define VERSION "V0.1.3"
 
 void print_usage(void) {
   printf("sbor - C Project Manager and Package Manager\n\n");
