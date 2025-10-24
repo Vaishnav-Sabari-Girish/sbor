@@ -27,13 +27,17 @@ cmake .
 make
 
 # Run the binary
-./sbor
+./sbor version
 ```
 
 ### Using Homebrew
 
 ```bash
 brew install Vaishnav-Sabari-Girish/taps/sbor
+
+# Then Run
+
+sbor version
 ```
 
 ## Goals
