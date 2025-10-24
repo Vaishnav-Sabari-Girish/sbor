@@ -16,6 +16,8 @@ Since the dependencies have to be imported , they are also included in a separat
 
 ## Installation and Running
 
+### From Source
+
 ```bash
 # Run cmake to generate the Makefile
 cmake .
@@ -25,6 +27,12 @@ make
 
 # Run the binary
 ./sbor
+```
+
+### Using Homebrew
+
+```bash
+brew install Vaishnav-Sabari-Girish/taps/sbor
 ```
 
 ## Goals
