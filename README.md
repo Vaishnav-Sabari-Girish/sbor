@@ -5,7 +5,7 @@
 
 ## Functionalities (Not yet created)
 
-1. `sbor init` : Initializes a new C project
+1. `sbor init` : Initializes a new C project  (**Created**)
 2. `sbor add` : Adds a new dependency (No need to add `#include` in main.c file, this will do it automatically)
 3. `sbor build` : Builds the project and creates a new binary
 4. `sbor run` : Builds and runs the project
@@ -31,13 +31,15 @@ make
 
 ### Project Manager (To be created first)
 
-- [ ] Initialize a project using `sbor init`
+- [x] Initialize a project using `sbor init`
 - [ ] Add dependencies using `sbor add`
 - [ ] Build the project using `sbor build`
 - [ ] Remove a dependency using `sbor remove`
 - [ ] Run the project using `sbor run`
 
-### Package Manager
 
-- [ ] Run `sbor install` to install a C project.
-- [ ] Run `sbor uninstall` to uninstall an app.
+## Recordings 
+
+### Initializing a project
+
+![init](./assets/recordings/hello_world.gif)

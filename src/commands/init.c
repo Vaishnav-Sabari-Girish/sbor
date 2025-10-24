@@ -37,7 +37,7 @@ int cmd_init(int argc, char *argv[]) {
 
   // Change to project directory for relative paths
   char src_dir[256];
-  snprintf(src_dir, sizeof(src_dir), "%s/src\n", project_name);
+  snprintf(src_dir, sizeof(src_dir), "%s/src", project_name);
 
   // Create src directory
   if (create_directory(src_dir) != 0) {
@@ -49,12 +49,12 @@ int cmd_init(int argc, char *argv[]) {
   char cmake_path[256], main_path[256], include_path[256];
   char readme_path[256], gitignore_path[256], config_path[256];
 
-  snprintf(cmake_path, sizeof(cmake_path), "%s/CMakeLists.txt\n", project_name);
-  snprintf(main_path, sizeof(main_path), "%s/src/main.c\n", project_name);
-  snprintf(include_path, sizeof(include_path), "%s/src/include.h\n", project_name);
-  snprintf(readme_path, sizeof(readme_path), "%s/README.md\n", project_name);
-  snprintf(gitignore_path, sizeof(gitignore_path), "%s/.gitignore\n", project_name);
-  snprintf(config_path, sizeof(config_path), "%s/sbor.conf\n", project_name);
+  snprintf(cmake_path, sizeof(cmake_path), "%s/CMakeLists.txt", project_name);
+  snprintf(main_path, sizeof(main_path), "%s/src/main.c", project_name);
+  snprintf(include_path, sizeof(include_path), "%s/src/include.h", project_name);
+  snprintf(readme_path, sizeof(readme_path), "%s/README.md", project_name);
+  snprintf(gitignore_path, sizeof(gitignore_path), "%s/.gitignore", project_name);
+  snprintf(config_path, sizeof(config_path), "%s/sbor.conf", project_name);
 
   // Generate and create files
   printf("Creating Project Files\n");
