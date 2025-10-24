@@ -56,3 +56,7 @@ sbor version
 ### Initializing a project
 
 ![init](./assets/recordings/hello_world.gif)
+
+### Building a project
+
+![build](./assets/recordings/testing_build.gif)
