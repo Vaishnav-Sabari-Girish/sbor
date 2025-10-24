@@ -7,8 +7,9 @@
 
 1. `sbor init` : Initializes a new C project  (**Created**)
 2. `sbor add` : Adds a new dependency (No need to add `#include` in main.c file, this will do it automatically)
-3. `sbor build` : Builds the project and creates a new binary
-4. `sbor run` : Builds and runs the project
+3. `sbor remove` : Removes a dependency
+4. `sbor build` : Builds the project and creates a new binary (**Created**)
+5. `sbor run` : Builds and runs the project
 
 The dependencies are listed a configuration file (`sbor.conf`) which also contains the project metadata.
 
@@ -41,7 +42,7 @@ brew install Vaishnav-Sabari-Girish/taps/sbor
 
 - [x] Initialize a project using `sbor init`
 - [ ] Add dependencies using `sbor add`
-- [ ] Build the project using `sbor build`
+- [x] Build the project using `sbor build`
 - [ ] Remove a dependency using `sbor remove`
 - [ ] Run the project using `sbor run`
 
