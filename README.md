@@ -1,6 +1,6 @@
 # Sbor
 
-`sbor` is a package manager cum project manager for C
+`sbor` is a  project manager for C
 
 
 ## Functionalities (Not yet created)
