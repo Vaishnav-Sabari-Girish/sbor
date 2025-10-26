@@ -225,7 +225,6 @@ show_changes() {
   fi
 }
 
-# Main execution
 main() {
   echo "🚀 SBOR Release Automation Script"
   echo
@@ -251,7 +250,6 @@ main() {
   current_version=$(get_current_version)
   if [ -z "$current_version" ]; then
     echo "❌ Could not parse current version from src/main.c"
-    echo "Expected format: #define VERSION \"V0.1.6\""
     exit 1
   fi
 
@@ -260,10 +258,8 @@ main() {
   # Get new version
   new_version=$(increment_version "$current_version")
 
-  # Validate new version format
   if [[ ! "$new_version" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
     echo "❌ Invalid version format: '$new_version'"
-    echo "Expected format: x.y.z (e.g., 0.1.7)"
     exit 1
   fi
 
@@ -279,44 +275,47 @@ main() {
   update_version_files "$new_version"
   echo
 
-  # Step 2: Create GitHub release
+  # Step 2: COMMIT VERSION CHANGES FIRST (FIXED ORDER!)
+  echo "📤 Committing version changes before creating release..."
+  git add src/main.c CMakeLists.txt
+  git commit -m "Bump version to $new_version"
+  git push origin main # Push the version changes
+
+  echo "✅ Version changes committed and pushed"
+  echo
+
+  # Step 3: NOW create GitHub release (will use the new committed version)
   create_github_release "$new_version"
   echo
 
-  # Step 3: Get SHA256
-  echo "⏳ Waiting a moment for GitHub to process the release..."
+  # Step 4: Get SHA256
+  echo "⏳ Waiting for GitHub to process the release..."
   sleep 3
 
   sha256=$(get_sha256 "$new_version")
   echo "🔐 SHA256: $sha256"
   echo
 
-  # Step 4: Update Homebrew formula
+  # Step 5: Update Homebrew formula
   update_homebrew_formula "$new_version" "$sha256"
   echo
 
-  # Step 5: Show changes and get confirmation
+  # Step 6: Show changes and get confirmation
   show_changes "$new_version" "$sha256"
   echo
 
-  if ! gum confirm "🚀 Push these changes to repositories?"; then
-    echo "🚫 Push cancelled - changes are staged but not pushed"
-    cleanup_backup_files
+  if ! gum confirm "🚀 Push Homebrew formula changes?"; then
+    echo "🚫 Homebrew update cancelled"
     exit 0
   fi
 
-  # Step 6: Clean up backup files after user approval
+  # Step 7: Clean up backup files
   cleanup_backup_files
   echo
-
-  # Step 7: Commit and push using acp function
-  echo "📤 Committing and pushing changes..."
-  acp
 
   # Step 8: Handle homebrew formula changes
   if [ -f "$HOMEBREW_FORMULA_PATH" ]; then
     echo "🍺 Homebrew formula has been updated!"
-    echo "📍 Formula location: $HOMEBREW_FORMULA_PATH"
 
     if gum confirm "🤔 Commit and push Homebrew formula changes automatically?"; then
       HOMEBREW_DIR="$(dirname "$HOMEBREW_FORMULA_PATH")/.."
@@ -324,18 +323,10 @@ main() {
 
       echo "📁 Now in homebrew-taps directory: $(pwd)"
 
-      find . -name "*.bak" -type f -delete 2>/dev/null || true
-
       git add Formula/sbor.rb
       git commit -m "Update sbor to v$new_version"
-
-      if git remote | grep -q origin; then
-        git push origin main
-        echo "✅ Pushed homebrew formula changes to origin/main"
-      else
-        echo "⚠️  No 'origin' remote found in homebrew-taps repo"
-        echo "💡 Please push manually: git push <remote> <branch>"
-      fi
+      git push origin main
+      echo "✅ Pushed homebrew formula changes"
 
       cd - >/dev/null
     fi
@@ -344,11 +335,10 @@ main() {
   echo
   echo "🎉 Release v$new_version completed successfully!"
   echo "📋 Summary:"
-  echo "   ✅ Version updated to v$new_version"
-  echo "   ✅ GitHub release created"
+  echo "   ✅ Version updated to v$new_version and committed"
+  echo "   ✅ GitHub release created from new commit"
   echo "   ✅ Homebrew formula updated"
-  echo "   ✅ Changes committed and pushed"
-  echo "   ✅ Backup files cleaned up"
+  echo "   ✅ All changes pushed"
 }
 
 # Run main function
