@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.15)
 
 # Project definition
 project(sbor
-    VERSION 1.0.0
+    VERSION 0.1.5
     DESCRIPTION "C Project Manager and Package Manager"
     LANGUAGES C
 )
