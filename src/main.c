@@ -14,7 +14,10 @@ void print_usage(void) {
   printf("  list            List current headers\n");
   printf("  build           Build the project\n");
   printf("  run             Build and run the project\n");
+  printf("    -q            Build and Run in quiet Mode\n");
+  printf("    -v            Build and Run in verbose Mode (Default)\n");
   printf("  version         Display sbor version\n");
+  printf("  clean           Clean the build files\n");
   printf("  help            Display this message\n\n");
   printf("Examples:\n");
   printf("  sbor init my_project\n");

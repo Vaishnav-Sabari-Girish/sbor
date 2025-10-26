@@ -15,34 +15,6 @@
 
 #include "../include/commands.h"
 
-// Helper functions to check if a file exists
-int file_exists(const char *filename) {
-  struct stat buffer;
-  return (stat(filename, &buffer) == 0);
-}
-
-// Helper function to check if we are in a valid sbor project
-int is_valid_sbor_project() {
-  return file_exists("CMakeLists.txt") && file_exists("sbor.conf") && file_exists("src");
-}
-
-// Helper function to execute a command and return it's exit status
-int execute_command(const char *command) {
-  printf("Executing: %s\n", command);
-
-  int result = system(command);
-
-#ifdef _WIN32
-  return result;
-#else
-  // Unix returns system output a bit differently
-  if (WIFEXITED(result)) {
-    return WEXITSTATUS(result);
-  } else {
-    return -1;        // Command failed to execute
-  }
-#endif
-}
 
 int cmd_build(int argc, char *argv[]) {
   (void)argc;

@@ -9,7 +9,7 @@
 2. `sbor add` : Adds a new dependency (No need to add `#include` in main.c file, this will do it automatically)
 3. `sbor remove` : Removes a dependency
 4. `sbor build` : Builds the project and creates a new binary (**Created**)
-5. `sbor run` : Builds and runs the project
+5. `sbor run` : Builds and runs the project (**Completed**)
 
 The dependencies are listed a configuration file (`sbor.conf`) which also contains the project metadata.
 
@@ -53,7 +53,7 @@ sbor version
 - [ ] Add dependencies using `sbor add`
 - [x] Build the project using `sbor build`
 - [ ] Remove a dependency using `sbor remove`
-- [ ] Run the project using `sbor run`
+- [x] Run the project using `sbor run`
 
 
 ## Recordings 
@@ -65,3 +65,13 @@ sbor version
 ### Building a project
 
 ![build](./assets/recordings/testing_build.gif)
+
+### Running the project
+
+#### Verbose Mode (Default)
+
+![run_verbose](./assets/recordings/testing_run_verbose.gif)
+
+#### Quiet Mode
+
+![run_quiet](./assets/recordings/testing_run_quiet.gif)

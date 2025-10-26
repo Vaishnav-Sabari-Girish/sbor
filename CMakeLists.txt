@@ -23,6 +23,8 @@ set(SOURCES
     src/commands/init.c
     src/core/templates.c
     src/commands/build.c
+    src/commands/run.c
+    src/core/utils.c
     src/commands/stubs.c
     # Add more .c files here as needed
     # Future: src/commands/init.c

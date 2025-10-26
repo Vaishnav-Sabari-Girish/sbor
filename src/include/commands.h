@@ -19,6 +19,10 @@ char* generate_readme_template(const char *project_name);
 char* generate_gitignore_template(void);
 char* generate_config_template(const char *project_name);
 
+// Shared utility functions 
+int file_exists(const char *filename);
+int is_valid_sbor_project(void);
+int execute_command(const char *command);
+char* get_project_name(void);
 
 #endif // !COMMANDS_H
-

@@ -32,9 +32,9 @@ int cmd_list(int argc, char *argv[]) {
     return 0;
 }*/
 
-int cmd_run(int argc, char *argv[]) {
+/*int cmd_run(int argc, char *argv[]) {
     (void)argc;  // Suppress unused parameter warning
     (void)argv;  // Suppress unused parameter warning
     printf("🚧 run command not implemented yet\n");
     return 0;
-}
+}*/
