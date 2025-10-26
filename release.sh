@@ -275,13 +275,12 @@ main() {
   update_version_files "$new_version"
   echo
 
-  # Step 2: COMMIT VERSION CHANGES FIRST (FIXED ORDER!)
+  # Step 2: Use acp() function to commit version changes BEFORE creating release
   echo "📤 Committing version changes before creating release..."
-  git add src/main.c CMakeLists.txt
-  git commit -m "Bump version to $new_version"
-  git push origin main # Push the version changes
+  echo "   Use your custom commit message to describe the version bump"
+  acp # This will commit and push the version changes
 
-  echo "✅ Version changes committed and pushed"
+  echo "✅ Version changes committed and pushed using acp()"
   echo
 
   # Step 3: NOW create GitHub release (will use the new committed version)
@@ -306,6 +305,7 @@ main() {
 
   if ! gum confirm "🚀 Push Homebrew formula changes?"; then
     echo "🚫 Homebrew update cancelled"
+    cleanup_backup_files
     exit 0
   fi
 
@@ -313,7 +313,7 @@ main() {
   cleanup_backup_files
   echo
 
-  # Step 8: Handle homebrew formula changes
+  # Step 8: Handle homebrew formula changes (separate repo)
   if [ -f "$HOMEBREW_FORMULA_PATH" ]; then
     echo "🍺 Homebrew formula has been updated!"
 
@@ -323,19 +323,28 @@ main() {
 
       echo "📁 Now in homebrew-taps directory: $(pwd)"
 
+      # Clean up backup files in homebrew repo too
+      find . -name "*.bak" -type f -delete 2>/dev/null || true
+
       git add Formula/sbor.rb
       git commit -m "Update sbor to v$new_version"
       git push origin main
       echo "✅ Pushed homebrew formula changes"
 
       cd - >/dev/null
+    else
+      echo "💡 Remember to commit homebrew formula changes manually:"
+      echo "   cd '$HOMEBREW_DIR'"
+      echo "   git add Formula/sbor.rb"
+      echo "   git commit -m 'Update sbor to v$new_version'"
+      echo "   git push origin main"
     fi
   fi
 
   echo
   echo "🎉 Release v$new_version completed successfully!"
   echo "📋 Summary:"
-  echo "   ✅ Version updated to v$new_version and committed"
+  echo "   ✅ Version updated to v$new_version and committed via acp()"
   echo "   ✅ GitHub release created from new commit"
   echo "   ✅ Homebrew formula updated"
   echo "   ✅ All changes pushed"
