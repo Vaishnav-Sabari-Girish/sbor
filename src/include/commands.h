@@ -8,6 +8,7 @@ int cmd_remove(int argc, char *argv[]);
 int cmd_list(int argc, char *argv[]);
 int cmd_build(int argc, char *argv[]);
 int cmd_run(int argc, char *argv[]);
+int cmd_clean(int argc, char *argv[]);
 
 // Utility functions for the init Command
 int create_directory(const char *path);

@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.15)
 
 # Project definition
 project(sbor
-    VERSION 0.1.5
+    VERSION 0.1.6
     DESCRIPTION "C Project Manager and Package Manager"
     LANGUAGES C
 )
@@ -24,6 +24,7 @@ set(SOURCES
     src/core/templates.c
     src/commands/build.c
     src/commands/run.c
+    src/commands/clean.c
     src/core/utils.c
     src/commands/stubs.c
     # Add more .c files here as needed

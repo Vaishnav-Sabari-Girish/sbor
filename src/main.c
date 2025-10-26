@@ -2,7 +2,7 @@
 #include <string.h>
 #include "include/commands.h"
 
-#define VERSION "V0.1.5"
+#define VERSION "V0.1.6"
 
 void print_usage(void) {
   printf("sbor - C Project Manager and Package Manager\n\n");
@@ -53,6 +53,8 @@ int main(int argc, char *argv[]) {
   } else if (strcmp(command, "version") == 0) {
     printf("Version : %s\n", VERSION);
     return 0;
+  } else if (strcmp(command, "clean") == 0) {
+    return cmd_clean(argc - 1, argv + 1);
   } else {
     fprintf(stderr, "Unknown Command : %s\n", command);
     print_usage();

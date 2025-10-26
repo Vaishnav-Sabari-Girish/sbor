@@ -1,15 +1,18 @@
 # Sbor
 
-`sbor` is a  project manager for C
+`sbor` is a  project manager for C inspired by `cargo`.
+
+`sbor` means **Collection** in **Russian**.
 
 
-## Functionalities (Not yet created)
+## Functionalities (Not yet created) (Created ones are marked as **Created**)
 
 1. `sbor init` : Initializes a new C project  (**Created**)
 2. `sbor add` : Adds a new dependency (No need to add `#include` in main.c file, this will do it automatically)
 3. `sbor remove` : Removes a dependency
 4. `sbor build` : Builds the project and creates a new binary (**Created**)
 5. `sbor run` : Builds and runs the project (**Completed**)
+6. `sbor clean` : Removed build artifacts (**Completed**)
 
 The dependencies are listed a configuration file (`sbor.conf`) which also contains the project metadata.
 
@@ -54,6 +57,7 @@ sbor version
 - [x] Build the project using `sbor build`
 - [ ] Remove a dependency using `sbor remove`
 - [x] Run the project using `sbor run`
+- [x] Delete build artifacts using `sbor clean`
 
 
 ## Recordings 
@@ -75,3 +79,7 @@ sbor version
 #### Quiet Mode
 
 ![run_quiet](./assets/recordings/testing_run_quiet.gif)
+
+### Cleaning the project
+
+![clean](./assets/recordings/testing_clean.gif)
