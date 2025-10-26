@@ -143,45 +143,53 @@ create_github_release() {
   echo "✅ GitHub release $tag created successfully!"
 }
 
-# Function to get SHA256 hash (FIXED - CLEAN OUTPUT ONLY)
+# Function to get SHA256 hash (COMPLETELY ISOLATED)
 get_sha256() {
   local version=$1
   local url="$ARCHIVE_BASE_URL/v${version}.tar.gz"
 
-  # Send progress message to stderr so it doesn't contaminate the SHA256
-  echo "🔐 Calculating SHA256 for v$version..." >&2
+  # Show progress to stderr only
+  printf "🔐 Calculating SHA256 for v%s...\n" "$version" >&2
 
-  # Get SHA256 directly without gum spin to avoid output contamination
+  # Get SHA256 in complete isolation - redirect all possible output
   local sha256
-  sha256=$(curl -sL "$url" | shasum -a 256 | cut -d' ' -f1)
+  sha256=$(curl -sL "$url" 2>/dev/null | shasum -a 256 2>/dev/null | awk '{print $1}')
 
-  # Output ONLY the clean SHA256 hash to stdout
-  echo "$sha256"
+  # Trim any whitespace and validate
+  sha256=$(echo "$sha256" | tr -d '[:space:]')
+
+  # Validate format
+  if [[ ${#sha256} -eq 64 ]] && [[ "$sha256" =~ ^[a-f0-9]+$ ]]; then
+    printf "%s\n" "$sha256"
+  else
+    printf "Error: Invalid SHA256 received: '%s'\n" "$sha256" >&2
+    return 1
+  fi
 }
 
-# Function to update homebrew formula
+# Function to update homebrew formula (SAFER)
 update_homebrew_formula() {
   local version=$1
   local sha256=$2
 
-  echo "🍺 Updating Homebrew formula..."
+  printf "🍺 Updating Homebrew formula...\n"
 
   if [ ! -f "$HOMEBREW_FORMULA_PATH" ]; then
-    echo "❌ Homebrew formula not found at: $HOMEBREW_FORMULA_PATH"
-    echo "⚠️  Please make sure the homebrew-taps repository exists at the expected location"
+    printf "❌ Homebrew formula not found at: %s\n" "$HOMEBREW_FORMULA_PATH"
     return 1
   fi
 
-  # Update using sd
-  sd 'url ".*"' "url \"https://github.com/$REPO/archive/v$version.tar.gz\"" "$HOMEBREW_FORMULA_PATH"
-  sd 'sha256 ".*"' "sha256 \"$sha256\"" "$HOMEBREW_FORMULA_PATH"
-  sd 'version ".*"' "version \"$version\"" "$HOMEBREW_FORMULA_PATH"
+  # Use more precise patterns for sd
+  sd 'url "https://github\.com/[^/]+/[^/]+/archive/v[^"]*\.tar\.gz"' "url \"https://github.com/$REPO/archive/v$version.tar.gz\"" "$HOMEBREW_FORMULA_PATH"
 
-  echo "✅ Updated Homebrew formula with:"
-  echo "   - Version: $version"
-  echo "   - SHA256: $sha256"
-  echo "   - URL: https://github.com/$REPO/archive/v$version.tar.gz"
-  echo "   - File: $HOMEBREW_FORMULA_PATH"
+  sd 'sha256 "[a-f0-9]*"' "sha256 \"$sha256\"" "$HOMEBREW_FORMULA_PATH"
+
+  sd 'version "[0-9]+\.[0-9]+\.[0-9]+"' "version \"$version\"" "$HOMEBREW_FORMULA_PATH"
+
+  printf "✅ Updated Homebrew formula with:\n"
+  printf "   - Version: %s\n" "$version"
+  printf "   - SHA256: %s\n" "$sha256"
+  printf "   - URL: https://github.com/%s/archive/v%s.tar.gz\n" "$REPO" "$version"
 }
 
 # Function to show changes for confirmation
