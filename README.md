@@ -4,6 +4,7 @@
 
 `sbor` means **Collection** in **Russian**.
 
+[![Release](https://img.shields.io/badge/Release-V0.1.7-blue?style=for-the-badge&labelColor=gray)](https://github.com/Vaishnav-Sabari-Girish/sbor/releases/tag/v0.1.7)
 
 ## Functionalities (Not yet created) (Created ones are marked as **Created**)
 
