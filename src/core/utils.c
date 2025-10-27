@@ -163,4 +163,63 @@ static char* remove_from_json_array(const char *array_str, const char *item) {
   return new_array;
 }
 
-int read_config_file(char **content);
+int read_config_file(char **content) {
+  FILE *file = fopen("sbor.conf", "r");
+  if (!file) return -1;
+
+  fseek(file, 0, SEEK_END);
+  long length = ftell(file);
+  fseek(file, 0, SEEK_SET);
+
+  *content = malloc(length + 1);
+  fread(*content, 1, length, file);
+
+  (*content)[length] = '\0';
+
+  fclose(file);
+  return 0;
+}
+
+int write_config_file(const char *content) {
+  FILE *file = fopen("sbor.conf", "w");
+  if (!file) return -1;
+
+  fputs(content, file);
+  fclose(file);
+  return 0;
+}
+
+int add_system_header(const char *header) {
+  char *config_content;
+  if (read_config_file(&config_content) != 0) {
+    return -1;
+  }
+
+  // Find systems array
+  char *system_array = find_json_array(config_content, "system");
+  if (!system_array) {
+    free(config_content);
+    return -1;
+  }
+
+  // Add header with .h extension if not present
+  char full_header[256];
+  if (strstr(header, ".h") == NULL) {
+    snprintf(full_header, sizeof(full_header), "%s.h", header);
+  } else {
+    strcpy(full_header, header);
+  }
+
+  char *new_system_array = add_to_json_array(system_array, full_header);
+
+  // Replace in config
+  char *system_start = strstr(config_content, system_array);
+  if (!system_start) {
+    free(config_content);
+    free(system_array);
+    free(new_system_array);
+    return -1;
+  }
+
+
+}
