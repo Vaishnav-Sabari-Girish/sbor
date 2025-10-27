@@ -26,4 +26,12 @@ int is_valid_sbor_project(void);
 int execute_command(const char *command);
 char* get_project_name(void);
 
+// JSON utility functions for add and remove commands
+int add_system_header(const char *header);
+int add_custom_header(const char *header);
+int remove_header(const char *header);
+int update_include_file(void);
+int read_config_file(char **content);
+int write_config_file(const char *content);
+
 #endif // !COMMANDS_H

@@ -25,6 +25,8 @@ set(SOURCES
     src/commands/build.c
     src/commands/run.c
     src/commands/clean.c
+    src/commands/add.c
+    src/commands/remove.c
     src/core/utils.c
     src/commands/stubs.c
     # Add more .c files here as needed
