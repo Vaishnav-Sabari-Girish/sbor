@@ -83,3 +83,8 @@ sbor version
 ### Cleaning the project
 
 ![clean](./assets/recordings/testing_clean.gif)
+
+## Stargazers over time
+
+![stargazers badge](https://readme-contribs.as93.net/stargazers/Vaishnav-Sabari-Girish/sbor)
+
