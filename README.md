@@ -32,6 +32,13 @@ Since the dependencies have to be imported , they are also included in a separat
 curl -sSL https://raw.githubusercontent.com/Vaishnav-Sabari-Girish/sbor/refs/heads/main/install.sh | bash
 ```
 
+### For Powershell users
+
+```ps1
+powershell -ExecutionPolicy Bypass -Command "iwr -useb https://raw.githubusercontent.com/Vaishnav-Sabari-Girish/sbor/refs/heads/main/install.ps1 | iex"
+```
+
+
 ### From Source
 
 ```bash
