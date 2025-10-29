@@ -2,7 +2,7 @@
 #include <string.h>
 #include "include/commands.h"
 
-#define VERSION "V0.1.8"
+#define VERSION "V0.1.9"
 
 
 void print_usage(void) {
