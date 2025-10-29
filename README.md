@@ -6,14 +6,14 @@
 
 [![Release](https://img.shields.io/badge/Release-V0.1.7-blue?style=for-the-badge&labelColor=gray)](https://github.com/Vaishnav-Sabari-Girish/sbor/releases/tag/v0.1.7)
 
-## Functionalities (Not yet created) (Created ones are marked as **Created**)
+## Functionalities
 
-1. `sbor init` : Initializes a new C project  (**Created**)
+1. `sbor init` : Initializes a new C project   
 2. `sbor add` : Adds a new dependency (No need to add `#include` in main.c file, this will do it automatically)
 3. `sbor remove` : Removes a dependency
-4. `sbor build` : Builds the project and creates a new binary (**Created**)
-5. `sbor run` : Builds and runs the project (**Completed**)
-6. `sbor clean` : Removed build artifacts (**Completed**)
+4. `sbor build` : Builds the project and creates a new binary  
+5. `sbor run` : Builds and runs the project 
+6. `sbor clean` : Removed build artifacts 
 
 The dependencies are listed a configuration file (`sbor.conf`) which also contains the project metadata.
 
@@ -54,11 +54,12 @@ sbor version
 ### Project Manager
 
 - [x] Initialize a project using `sbor init`
-- [ ] Add dependencies using `sbor add`
+- [x] Add dependencies using `sbor add`
 - [x] Build the project using `sbor build`
-- [ ] Remove a dependency using `sbor remove`
+- [x] Remove a dependency using `sbor remove`
 - [x] Run the project using `sbor run`
 - [x] Delete build artifacts using `sbor clean`
+- [ ] Add a quiet option for code running in `sbor.conf` (Run code in quiet mode)
 
 
 ## Recordings 
@@ -84,6 +85,10 @@ sbor version
 ### Cleaning the project
 
 ![clean](./assets/recordings/testing_clean.gif)
+
+### Adding and Removing headers
+
+![add_remove](./assets/recordings/testing_add_remove.gif)
 
 ## Stargazers over time
 
