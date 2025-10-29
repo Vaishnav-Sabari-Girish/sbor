@@ -26,6 +26,12 @@ Since the dependencies have to be imported , they are also included in a separat
 
 ## Installation and Running
 
+### Using `curl`
+
+```bash
+curl -sSL https://raw.githubusercontent.com/Vaishnav-Sabari-Girish/sbor/refs/heads/main/install.sh | bash
+```
+
 ### From Source
 
 ```bash
