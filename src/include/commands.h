@@ -9,6 +9,7 @@ int cmd_list(int argc, char *argv[]);
 int cmd_build(int argc, char *argv[]);
 int cmd_run(int argc, char *argv[]);
 int cmd_clean(int argc, char *argv[]);
+int cmd_config(int argc, char *argv[]);  // Add this
 
 // Utility functions for the init Command
 int create_directory(const char *path);
@@ -20,18 +21,23 @@ char* generate_readme_template(const char *project_name);
 char* generate_gitignore_template(void);
 char* generate_config_template(const char *project_name);
 
-// Shared utility functions 
+// Shared utility functions
 int file_exists(const char *filename);
 int is_valid_sbor_project(void);
 int execute_command(const char *command);
 char* get_project_name(void);
 
-// JSON utility functions for add and remove commands
+// JSON utility functions for add/remove commands
 int add_system_header(const char *header);
 int add_custom_header(const char *header);
 int remove_header(const char *header);
 int update_include_file(void);
 int read_config_file(char **content);
 int write_config_file(const char *content);
+
+// JSON parsing functions for quiet_mode
+int get_quiet_mode_setting(void);
+int set_quiet_mode_setting(int quiet_mode);
+int get_json_boolean(const char *json, const char *section, const char *key);
 
 #endif // !COMMANDS_H

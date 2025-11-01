@@ -531,3 +531,11 @@ int update_include_file(void) {
     printf("Debug: Updated include.h successfully\n");
     return 0;
 }
+
+int get_json_boolean(const char *json, const char *section, const char *key) {
+  // Find the section
+  char section_pattern[256];
+  snprintf(section_pattern, sizeof(section_pattern), "\"%s\":", section);
+
+  char *section_start = strstr(json, section_pattern);
+}

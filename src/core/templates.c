@@ -134,6 +134,9 @@ char* generate_config_template(const char *project_name) {
            "        \"flags\": [\"-Wall\", \"-Wextra\", \"-O2\"],\n"
            "        \"output_dir\": \"build\"\n"
            "    }\n"
+           "    \"run\": {\n"
+           "          \"quiet_mode\": false\n"
+           "     }\n"
            "}\n",
            project_name);
   return template;
