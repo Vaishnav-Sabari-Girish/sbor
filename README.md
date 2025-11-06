@@ -1,3 +1,8 @@
+<p align="center">
+  <img src="./assets/images/logo.png" alt="logo" />
+</p>
+
+
 # Sbor
 
 `sbor` is a  project manager for C inspired by `cargo`.
